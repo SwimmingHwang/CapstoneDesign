@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="apache-mime4j-0.6.apache-mime4j-0.6-sources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/apache-mime4j-0.6/apache-mime4j-0.6-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

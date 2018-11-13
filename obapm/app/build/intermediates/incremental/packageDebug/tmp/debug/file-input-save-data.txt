@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Nov 13 19:14:48 KST 2018
+0.baseType=DIRECTORY
+0.base=D\:\\android\\obapm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\16
+0.path=classes.dex
+0.set=DEX
+count=1
