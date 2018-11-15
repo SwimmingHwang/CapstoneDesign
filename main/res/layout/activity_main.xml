@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_cal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/mainColor"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/tv_carbo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_above="@+id/tv_cal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"/>
+
+    <TextView
+        android:id="@+id/tv_prot"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_below="@+id/tv_cal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/tv_fat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_toLeftOf="@+id/tv_cal"
+        android:layout_above="@+id/tv_cal"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_vita"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_toLeftOf="@+id/tv_cal"
+        android:layout_below="@+id/tv_cal"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_diet"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_toRightOf="@+id/tv_cal"
+        android:layout_above="@+id/tv_cal"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_calcium"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/mainColor"
+        android:layout_toRightOf="@+id/tv_cal"
+        android:layout_below="@+id/tv_cal"
+        android:layout_margin="5dp"/>
+    </RelativeLayout>
+</LinearLayout>
