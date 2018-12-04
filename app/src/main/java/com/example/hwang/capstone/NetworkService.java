@@ -14,20 +14,27 @@ import retrofit2.http.Path;
 
 
 public interface NetworkService {
-    @POST("/web/foods/")
+    @POST("/obap/foods/")
     Call<Food> post_food(@Body Food food);
 
-    @PATCH("/web/foods/{pk}/")
+    @PATCH("/obap/foods/{pk}/")
     Call<Food> patch_food(@Path("pk") int pk, @Body Food food);
 
-    @DELETE("/web/foods/{pk}/")
+    @DELETE("/obap/foods/{pk}/")
     Call<Food> delete_food(@Path("pk") int pk);
 
-    @GET("/web/foods/")
+    @GET("/obap/foods/")
     Call<List<Food>> get_food();
 
-    @GET("/web/foods/{pk}/")
+
+    //usermeal
+    @GET("/obap/usermeals/")
+    Call<List<UserMeal>> get_usermeal();
+
+    @GET("/obap/foods/{pk}/")
     Call<Food> get_pk_food(@Path("pk") int pk);
+
+
 
 
 }

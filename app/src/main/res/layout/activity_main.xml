@@ -18,6 +18,17 @@
             android:layout_height="wrap_content"
             android:text="FOOD GET"/>
 
+        <TextView
+            android:id="@+id/usermeal_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/usermeal_bt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="USERMEAL GET"/>
+
         <!--
         <Button
             android:id="@+id/btsearch"
@@ -62,6 +73,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="FOOD DELETE"/>
+
+
+
+
+
+
+
+
+
+
         <!--
         <WebView
             android:layout_width="match_parent"

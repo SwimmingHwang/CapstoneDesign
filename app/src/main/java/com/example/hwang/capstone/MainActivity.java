@@ -127,8 +127,13 @@ public class MainActivity extends AppCompatActivity {
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -138,23 +143,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
-//import okhttp3.internal.Version;
-
-import okhttp3.internal.Version;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//import static com.example.hwang.capstone.R.id.webView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private WebView mWebView;
+    private String myUrl = "http://52.78.67.243:8000";
+    NetworkService networkService;
     //public final String TAG = "KJH";
-    private NetworkService networkService;
+
     @BindView(R.id.tv1) TextView tv1;
     @BindView(R.id.tv2) TextView tv2;
     @BindView(R.id.tv3) TextView tv3;
     @BindView(R.id.tv4) TextView tv4;
+
+    @BindView(R.id.usermeal_tv1) TextView usermeal_tv1;
+
 ////    @BindView(R.id.tv5) TextView tv5;
 ////    @BindView(R.id.tv6) TextView tv6;
 ////    @BindView(R.id.tv7) TextView tv7;
@@ -173,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
                 if(response.isSuccessful()) {
                     List<Food> foodList = response.body();
+
                     String food_txt = "";
                     for(Food food : foodList){
                         food_txt += food.getFood() + "\n";
@@ -192,6 +201,71 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.usermeal_bt1)
+    public void usermeal_bt1_Click()
+    {
+        //GET
+
+        Call<List<UserMeal>> usermealCall = networkService.get_usermeal();
+
+        usermealCall.enqueue(new Callback<List<UserMeal>>() {
+            @Override
+            public void onResponse(Call<List<UserMeal>> call, Response<List<UserMeal>> response) {
+                if(response.isSuccessful()) {
+                    List<UserMeal> usermealList = response.body();
+                    String usermeal_txt = "";
+                    for(UserMeal usermeal : usermealList){
+                        usermeal_txt += usermeal.getUsermeal() + "\n";
+                    }
+
+                    tv1.setText(usermeal_txt);
+                } else {
+                    int StatusCode = response.code();
+                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<UserMeal>> call, Throwable t) {
+                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+            }
+        });
+    }
+
+    /*
+    final EditText edittext=(EditText)findViewById(R.id.edittext);
+
+    static int idx;
+    @OnClick(R.id.btsearch)
+    public void btsearch_Click()
+    {
+        //GET
+
+        edittext.getText();
+
+        Call<Food> foodpkCall = networkService.get_pk_food(idx);
+
+        foodpkCall.enqueue(new Callback<Food>() {
+            @Override
+            public void onResponse(Call<Food> call, Response<Food> response) {
+                if(response.isSuccessful()) {
+                    Food food = response.body();
+                    food.getFood();
+
+                    tv1.setText(food.getFood());
+                } else {
+                    int StatusCode = response.code();
+                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Food> call, Throwable t) {
+                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+            }
+        });
+    }
+    */
     @OnClick(R.id.bt2)
     public void bt2_Click(){
         //POST
@@ -263,171 +337,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//
-//    @OnClick(R.id.bt5)
-//    public void bt5_click(){
-//        //Restaurant GET
-//        Call<List<Restaurant>> getCall = networkService.get_restaruant();
-//        getCall.enqueue(new Callback<List<Restaurant>>() {
-//            @Override
-//            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
-//                if( response.isSuccessful()) {
-//                    List<Restaurant> restaurantList = response.body();
-//
-//                    String restaurant_txt = "";
-//                    for(Restaurant restaurant : restaurantList){
-//                        restaurant_txt += restaurant.getName() +
-//                                restaurant.getAddress() +
-//                                restaurant.getCategory() +
-//                                restaurant.getWeather() +
-//                                restaurant.getDistance() +
-//                                restaurant.getDescription() +
-//                                "\n";
-//                    }
-//
-//                    tv5.setText(restaurant_txt);
-//                } else {
-//                    int StatusCode = response.code();
-//                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
-//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-//            }
-//        });
-//    }
-//
-//    @OnClick(R.id.bt6)
-//    public void bt6_click(){
-//        //Restaurant POST
-//        Restaurant restaurant = new Restaurant();
-//        restaurant.setName("음식점1");
-//        restaurant.setAddress("장소1");
-//        restaurant.setCategory(3);
-//        restaurant.setWeather(3);
-//        restaurant.setDistance(3);
-//        restaurant.setDescription("설명1");
-//
-//        Call<Restaurant> postCall = networkService.post_restaruant(restaurant);
-//        postCall.enqueue(new Callback<Restaurant>() {
-//            @Override
-//            public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
-//                if( response.isSuccessful()) {
-//                    tv6.setText("등록");
-//                } else {
-//                    int StatusCode = response.code();
-//                    try {
-//                        Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Restaurant> call, Throwable t) {
-//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-//            }
-//        });
-//    }
-//
-//    @OnClick(R.id.bt7)
-//    public void bt7_click(){
-//        //Restaurant PATCH
-//        //Full or partial patch available
-//        Restaurant restaurant = new Restaurant();
-//        restaurant.setName("이름22");
-//        restaurant.setAddress("장소22");
-//        restaurant.setCategory(3);
-//        restaurant.setWeather(1);
-//        restaurant.setDistance(2);
-//        restaurant.setDescription("장소22");
-//
-//        Call<Restaurant> patchCall = networkService.patch_restaruant(1, restaurant);
-//        patchCall.enqueue(new Callback<Restaurant>() {
-//            @Override
-//            public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
-//                if( response.isSuccessful()) {
-//                    tv7.setText("업데이트");
-//                } else {
-//                    int StatusCode = response.code();
-//                    try {
-//                        Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Restaurant> call, Throwable t) {
-//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-//            }
-//        });
-//    }
-//
-//    @OnClick(R.id.bt8)
-//    public void bt8_click(){
-//        //Restaurant DELETE
-//        Call<Restaurant> deleteCall = networkService.delete_restaruant(2);
-//        deleteCall.enqueue(new Callback<Restaurant>() {
-//
-//            @Override
-//            public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
-//                if ( response.isSuccessful()) {
-//                    tv8.setText("삭제");
-//                } else {
-//                    int StatusCode = response.code();
-//                    try {
-//                        Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Restaurant> call, Throwable t) {
-//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-//            }
-//        });
-//    }
-//
-//    @OnClick(R.id.bt9)
-//    public void bt9_click(){
-//        Call<List<Restaurant>> get_weather_pk_Call = networkService.get_weather_pk_restaruant(1);
-//        get_weather_pk_Call.enqueue(new Callback<List<Restaurant>>() {
-//            @Override
-//            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
-//                if( response.isSuccessful()) {
-//                    List<Restaurant> restaurantList = response.body();
-//
-//                    String restaurant_txt = "";
-//                    for(Restaurant restaurant : restaurantList){
-//                        restaurant_txt += restaurant.getName() +
-//                                restaurant.getAddress() +
-//                                restaurant.getCategory() +
-//                                restaurant.getWeather() +
-//                                restaurant.getDistance() +
-//                                restaurant.getDescription() +
-//                                "\n";
-//                    }
-//
-//                    tv9.setText(restaurant_txt);
-//                } else {
-//                    int StatusCode = response.code();
-//                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
-//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-//            }
-//        });
-//    }
 
 
     @Override
@@ -440,6 +349,37 @@ public class MainActivity extends AppCompatActivity {
         //application.buildNetworkService("61fa624f.ngrok.io");
         application.buildNetworkService("52.78.67.243", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
+
+        /*
+        // 웹뷰 셋
+        mWebView = (WebView) findViewById(webView);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        //mWebView.loadUrl("http://www.pois.co.kr/mobile/login.do");
+
+        mWebView.loadUrl(myUrl + "/web/foods/"); // 접속 URL
+        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.setWebViewClient(new WebViewClientClass());
+        */
     }
+    /*
+    private class WebViewClientClass extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Log.d("check URL",url);
+            view.loadUrl(url);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+            mWebView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+       */
+
 }
 
