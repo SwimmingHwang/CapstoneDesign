@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:id="@+id/container_foodlikelist">
+
+    <ImageView
+        android:id="@+id/iv_foodlikeimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <TextView
+        android:id="@+id/tv_foodlikename"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/iv_foodlikeimage"
+        android:padding="10dp"/>
+
+    <RatingBar
+        android:id="@+id/rb_foodlikerate"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/iv_foodlikeimage"
+        android:layout_below="@+id/tv_foodlikename"/>
+
+</RelativeLayout>

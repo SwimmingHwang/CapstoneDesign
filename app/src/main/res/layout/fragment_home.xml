@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#909090">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:layout_above="@+id/rl_recomendfood"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:id="@+id/tv_cal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/mainColor"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/tv_carbo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_above="@+id/tv_cal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_prot"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_below="@+id/tv_cal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_fat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_toLeftOf="@+id/tv_cal"
+            android:layout_above="@+id/tv_cal"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_vita"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_toLeftOf="@+id/tv_cal"
+            android:layout_below="@+id/tv_cal"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_diet"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_toRightOf="@+id/tv_cal"
+            android:layout_above="@+id/tv_cal"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_calcium"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/mainColor"
+            android:layout_toRightOf="@+id/tv_cal"
+            android:layout_below="@+id/tv_cal"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rl_recomendfood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_recomendfoodtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  회원님을 위한 추천 음식"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더보기    >   "
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_recomendffodimage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/rl_recomendfoodtext"
+            android:background="@drawable/tt"/>
+    </RelativeLayout>
+
+</RelativeLayout>
