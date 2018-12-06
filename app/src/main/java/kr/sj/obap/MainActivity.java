@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         ab= getSupportActionBar() ;
         checkPermission();
+
     }
 
     private boolean loadFragment(Fragment fragment) {
